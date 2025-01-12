@@ -39,7 +39,7 @@
                 <div class="news">
              	<c:forEach items="${DataTrangtintuc }" var="listalltintuc">
              		  <div class="news1">
-                        <a href="news1.html">
+                        <a href="ChitiettinServlet?nid=${listalltintuc.newsid}">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <img src="img/bangtin/${listalltintuc.img }" alt="">
