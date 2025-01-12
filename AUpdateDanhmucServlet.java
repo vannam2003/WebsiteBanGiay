@@ -8,21 +8,20 @@ import jakarta.servlet.http.HttpServletResponse;
 import modal.News;
 
 import java.io.IOException;
-import java.util.List;
 
-import dal.ProductDAO;
+import dal.AdminDAO;
 
 /**
- * Servlet implementation class TrangTinTucServlet
+ * Servlet implementation class AUpdateDanhmucServlet
  */
-@WebServlet("/TinTucServlet")
-public class TrangTinTucServlet extends HttpServlet {
+@WebServlet("/AUpdateDanhmucServlet")
+public class AUpdateDanhmucServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TrangTinTucServlet() {
+    public AUpdateDanhmucServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +30,14 @@ public class TrangTinTucServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String ctid = request.getParameter("ctid");
+		int cateid = Integer.parseInt(ctid);
 		
-		ProductDAO dao = new ProductDAO();
-		List<News> listalltintuc = dao.getTrangTinTuc();
+		AdminDAO dao = new AdminDAO();
+		News news = dao.getCategoryById(cateid);
 		
-		request.setAttribute("DataTrangtintuc", listalltintuc);
-		request.getRequestDispatcher("TinTuc.jsp").forward(request, response);
+		request.setAttribute("dtnews", news);
+		request.getRequestDispatcher("Suabaiviet.jsp").forward(request, response);
 	}
 
 	/**

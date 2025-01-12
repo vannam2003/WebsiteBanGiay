@@ -5,24 +5,25 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import modal.News;
+import modal.Categories;
+import modal.Product;
 
 import java.io.IOException;
 import java.util.List;
 
-import dal.ProductDAO;
+import dal.AdminDAO;
 
 /**
- * Servlet implementation class TrangTinTucServlet
+ * Servlet implementation class AdminQuanlydanhmucsanpham
  */
-@WebServlet("/TinTucServlet")
-public class TrangTinTucServlet extends HttpServlet {
+@WebServlet("/AdminQuanlydanhmucsanpham")
+public class AdminQuanlydanhmucsanpham extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TrangTinTucServlet() {
+    public AdminQuanlydanhmucsanpham() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +32,11 @@ public class TrangTinTucServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		AdminDAO dao = new AdminDAO();
+		List<Categories> listallcategory = dao.getAllCategory();
 		
-		ProductDAO dao = new ProductDAO();
-		List<News> listalltintuc = dao.getTrangTinTuc();
-		
-		request.setAttribute("DataTrangtintuc", listalltintuc);
-		request.getRequestDispatcher("TinTuc.jsp").forward(request, response);
+		request.setAttribute("Dtcategory", listallcategory);
+		request.getRequestDispatcher("AdminQuanlydanhmucsanpham.jsp").forward(request, response);
 	}
 
 	/**
